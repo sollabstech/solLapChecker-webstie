@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
+import { useDownload } from "./DownloadProvider";
 import Logo from "./Logo";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { onDownloadClick } = useDownload();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -53,6 +55,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <motion.a
             href={SITE.downloadUrl}
+            onClick={onDownloadClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="hidden items-center gap-2 rounded-full bg-electric px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_0_rgba(30,144,255,0)] transition-shadow duration-300 hover:shadow-[0_0_32px_rgba(30,144,255,0.75)] sm:inline-flex"
@@ -95,7 +98,10 @@ export default function Navbar() {
               <li className="pt-2">
                 <a
                   href={SITE.downloadUrl}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    onDownloadClick();
+                  }}
                   className="flex items-center justify-center gap-2 rounded-full bg-electric px-5 py-3 text-base font-semibold text-white"
                 >
                   <Download size={18} aria-hidden /> Download Free

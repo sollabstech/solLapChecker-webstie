@@ -1,11 +1,14 @@
+import { DOWNLOAD_URL, RELEASE_NOTES_URL } from "./download";
+
 export const SITE = {
   name: "SolLapChecker",
   url: "https://lapchecker.sollabstech.com",
   company: "Sollabs Tech",
   companyUrl: "https://www.sollabstech.com",
   tagline: "Innovate. Build. Deliver.",
-  // TODO: point this at the real installer once it is hosted.
-  downloadUrl: "#download",
+  // Set in src/lib/download.ts.
+  downloadUrl: DOWNLOAD_URL,
+  releaseNotesUrl: RELEASE_NOTES_URL,
   sampleReportUrl: "#report",
 } as const;
 

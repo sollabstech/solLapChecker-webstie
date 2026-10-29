@@ -2,12 +2,15 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Download, ShieldCheck } from "lucide-react";
+import { useDownload } from "./DownloadProvider";
 import LaptopMockup from "./LaptopMockup";
 import Particles from "./Particles";
+import ReleaseInfo from "./ReleaseInfo";
 import { Item, Stagger } from "./Reveal";
 import { SITE } from "@/lib/site";
 
 export default function Hero() {
+  const { onDownloadClick } = useDownload();
   return (
     <section id="top" className="relative overflow-hidden pb-20 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
       <div aria-hidden className="bg-grid absolute inset-0" />
@@ -39,6 +42,7 @@ export default function Hero() {
           <Item className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
             <motion.a
               href={SITE.downloadUrl}
+              onClick={onDownloadClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-electric to-[#3aa6ff] px-7 py-3.5 text-base font-semibold text-white shadow-[0_10px_40px_-8px_rgba(30,144,255,0.8)] transition-shadow duration-300 hover:shadow-[0_10px_60px_-4px_rgba(30,144,255,1)] sm:w-auto"
@@ -55,7 +59,10 @@ export default function Hero() {
               <ArrowRight size={18} aria-hidden className="transition-transform group-hover:translate-x-1" />
             </motion.a>
           </Item>
-          <Item className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-400 lg:justify-start">
+          <Item>
+            <ReleaseInfo className="mt-3 justify-center lg:justify-start" />
+          </Item>
+          <Item className="mt-5 flex items-center justify-center gap-2 text-sm text-slate-400 lg:justify-start">
             <ShieldCheck size={16} className="text-fresh" aria-hidden />
             No sign-up. No internet needed. Runs entirely on your PC.
           </Item>

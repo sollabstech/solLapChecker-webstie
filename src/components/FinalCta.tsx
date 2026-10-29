@@ -2,11 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
+import { useDownload } from "./DownloadProvider";
 import Particles from "./Particles";
+import ReleaseInfo from "./ReleaseInfo";
 import { Item, Stagger } from "./Reveal";
 import { SITE } from "@/lib/site";
 
 export default function FinalCta() {
+  const { onDownloadClick } = useDownload();
   return (
     <section id="download" className="relative px-4 py-20 sm:px-6 sm:py-28">
       <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 px-6 py-16 text-center sm:px-12 sm:py-24">
@@ -32,12 +35,16 @@ export default function FinalCta() {
           <Item>
             <motion.a
               href={SITE.downloadUrl}
+              onClick={onDownloadClick}
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.97 }}
               className="mt-9 inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-base font-bold text-navy shadow-[0_10px_50px_-8px_rgba(255,255,255,0.55)] transition-shadow duration-300 hover:shadow-[0_10px_70px_0_rgba(255,255,255,0.8)] sm:text-lg"
             >
               <Download size={20} aria-hidden /> Download for Windows
             </motion.a>
+          </Item>
+          <Item>
+            <ReleaseInfo className="mt-4 justify-center text-slate-300" />
           </Item>
         </Stagger>
       </div>
